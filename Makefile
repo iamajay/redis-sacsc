@@ -2,7 +2,6 @@ SHELL:=/usr/bin/env bash
 
 .PHONY: lint
 lint:
-	mypy redis_sacsc tests/**/*.py
 	flake8 .
 	doc8 -q docs
 

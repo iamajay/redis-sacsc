@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import redis
 from collections import defaultdict
 from .client import Redis as CachedRedis
@@ -8,7 +10,12 @@ from .crc import crc64
 class Manager(object):
     """ Redis Assisted Client Side Cache Manager """
 
-    def __init__(self: object, pool: redis.ConnectionPool, capacity: int = 128, sleep_time: int = 0):
+    def __init__(
+        self: object,
+        pool: redis.ConnectionPool,
+        capacity: int = 128,
+        sleep_time: int = 0,
+    ):
         self.pool = pool
         self.capacity = capacity
         self.sleep_time = sleep_time
@@ -56,5 +63,5 @@ class Manager(object):
     def slot(key):
         """ Returns the slot for a key """
         crc = crc64(key)
-        crc &= 0xffffff
+        crc &= 0xFFFFFF
         return crc

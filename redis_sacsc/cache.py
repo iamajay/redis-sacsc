@@ -1,8 +1,10 @@
+# -*- coding: utf-8 -*-
+
 from collections import OrderedDict
 
 
 class LRUCache(OrderedDict):
-    def __init__(self, manager,  maxsize=256, *args, **kwargs):
+    def __init__(self, manager, maxsize=256, *args, **kwargs):
         self.maxsize = maxsize
         self.manager = manager
         super().__init__(*args, **kwargs)

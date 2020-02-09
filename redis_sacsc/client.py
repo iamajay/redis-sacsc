@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import redis
 
 
@@ -7,12 +9,16 @@ class Redis(redis.Redis):
         self._manager = manager
         self._client_id = super().client_id()
         try:
-            self.execute_command('CLIENT', 'TRACKING', 'ON', 'redirect', self._manager.client_id)
+            self.execute_command(
+                "CLIENT", "TRACKING", "ON", "redirect", self._manager.client_id
+            )
         except redis.exceptions.ResponseError:
-            raise NotImplementedError("This redis version does not support this feature")
+            raise NotImplementedError(
+                "This redis version does not support this feature"
+            )
 
     def close(self):
-        self.execute_command('CLIENT', 'TRACKING', 'OFF')
+        self.execute_command("CLIENT", "TRACKING", "OFF")
         super().close()
 
     def get(self, name):
