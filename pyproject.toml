@@ -30,7 +30,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.6"
-redis = "^3.4"
+redis = "^3.4.0"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.750"
