@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/iamajay/redis-sacsc.svg?branch=master)](https://travis-ci.com/iamajay/redis-sacsc)
+[![Coverage](https://coveralls.io/repos/github/iamajay/redis-sacsc/badge.svg?branch=master)](https://coveralls.io/github/iamajay/redis-sacsc?branch=master)
+
 # redis-sacsc
 
 Redis Server-Assisted Client-Side Caching in Python
