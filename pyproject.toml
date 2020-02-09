@@ -9,7 +9,7 @@ style = "https://raw.githubusercontent.com/wemake-services/wemake-python-stylegu
 
 [tool.poetry]
 name = "redis-sacsc"
-version = "0.1.0"
+version = "0.0.1"
 description = "Redis Server-Assisted Client-Side Caching in Python"
 license = "MIT"
 
@@ -30,6 +30,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.6"
+redis = "^3.4"
 
 [tool.poetry.dev-dependencies]
 mypy = "^0.750"
