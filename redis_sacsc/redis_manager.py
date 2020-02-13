@@ -15,8 +15,10 @@ class Manager(object):
         pool: redis.ConnectionPool,
         capacity: int = 128,
         sleep_time: int = 0,
+        opt_in=False,
     ):
         self.pool = pool
+        self.opt_in = opt_in
         self.capacity = capacity
         self.sleep_time = sleep_time
         self.client = redis.Redis(connection_pool=self.pool)
@@ -56,7 +58,9 @@ class Manager(object):
 
     def get_connection(self, *args, **kwargs):
         """ Returns a cached Redis connection """
-        conn = CachedRedis(self, connection_pool=self.pool, *args, **kwargs)
+        conn = CachedRedis(
+            self, connection_pool=self.pool, opt_in=self.opt_in, *args, **kwargs
+        )
         return conn
 
     @staticmethod
