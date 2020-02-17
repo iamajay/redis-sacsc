@@ -2,7 +2,8 @@
 
 import redis
 from collections import defaultdict
-from .client import Redis as CachedRedis
+from .client import CachedRedis
+from .pubssub_thread import LocalPubSubWorkerThread
 from .cache import LRUCache
 from .crc import crc64
 
@@ -17,22 +18,38 @@ class Manager(object):
         sleep_time: int = 0,
         opt_in=False,
     ):
+
+        self.slots = None
+        self.cache = None
+        self.client_id = None
+        self._thread = None
         self.pool = pool
         self.opt_in = opt_in
         self.capacity = capacity
         self.sleep_time = sleep_time
         self.client = redis.Redis(connection_pool=self.pool)
-        self.slots = defaultdict(set)
-        self.cache = LRUCache(self, maxsize=self.capacity)
-        self._pubsub = self.client.pubsub(ignore_subscribe_messages=True)
-        self.client_id = self.client.client_id()
-        self._pubsub.subscribe(**{"__redis__:invalidate": self._handler})
-        self._thread = self._pubsub.run_in_thread(sleep_time=self.sleep_time)
+        self.reset()
+        self.start()
 
     def __del__(self):
         if self.client_id is not None:
             self._thread.stop()
             self.client_id = None
+
+    def reset(self):
+        """ Resets the manager """
+        self.slots = defaultdict(set)
+        self.cache = LRUCache(self, maxsize=self.capacity)
+
+    def start(self):
+        """ Starts the manager """
+        self.client_id = self.client.client_id()
+        _pubsub = self.client.pubsub(ignore_subscribe_messages=True)
+        _pubsub.subscribe(**{"__redis__:invalidate": self._handler})
+        self._thread = LocalPubSubWorkerThread(
+            self, _pubsub, sleep_time=self.sleep_time
+        )
+        self._thread.start()
 
     def _handler(self, message):
         """ Handles invalidation messages """

@@ -3,7 +3,7 @@
 import redis
 
 
-class Redis(redis.Redis):
+class CachedRedis(redis.Redis):
     def __init__(self, manager, opt_in, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
         self._manager = manager
@@ -32,10 +32,20 @@ class Redis(redis.Redis):
         self.execute_command("CLIENT", "TRACKING", "OFF")
         super().close()
 
-    def get(self, name, cache=False):
+    def get(self, name, opt_cache=False):
         try:
             value = self._manager.cache[name]
         except KeyError:
+            if self.opt_in and opt_cache:
+                self.__cache_next()
             value = super().get(name)
-            self._manager.cache[name] = value
+            if (self.opt_in and opt_cache) or not self.opt_in:
+                self._manager.cache[name] = value
+        except redis.exceptions.ConnectionError:
+            print("reset called" * 20)
+            self._manager.reset()
+            raise
         return value
+
+    def __cache_next(self):
+        self.execute_command("CACHING", "NOREPLY")
