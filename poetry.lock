@@ -389,7 +389,7 @@ description = "Python client for Redis key-value store"
 name = "redis"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "3.4.1"
+version = "3.5.1"
 
 [package.extras]
 hiredis = ["hiredis (>=0.1.3)"]
@@ -621,8 +621,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools"]
 
 [metadata]
-content-hash = "5d0b053caa95f41825e87698187527193ddc060c9a560b7f6ad7c0eb0b60e632"
-
+content-hash = "b568b556d6dc535cbca28543cd27dd1b00a9f494ddbbffb9b2d288bf38f2b47e"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -839,8 +838,8 @@ pyyaml = [
     {file = "PyYAML-5.3.tar.gz", hash = "sha256:e9f45bd5b92c7974e59bcd2dcc8631a6b6cc380a904725fce7bc08872e691615"},
 ]
 redis = [
-    {file = "redis-3.4.1-py2.py3-none-any.whl", hash = "sha256:b205cffd05ebfd0a468db74f0eedbff8df1a7bfc47521516ade4692991bb0833"},
-    {file = "redis-3.4.1.tar.gz", hash = "sha256:0dcfb335921b88a850d461dc255ff4708294943322bd55de6cfd68972490ca1f"},
+    {file = "redis-3.5.1-py2.py3-none-any.whl", hash = "sha256:a5b0e25890d216d8189636742c50ab992e42eea699bcc1b08cc2d6bf3adff52a"},
+    {file = "redis-3.5.1.tar.gz", hash = "sha256:6e9d2722a95d10ddf854596e66516d316d99c6a483e5db3b35c34e1158b2bfa1"},
 ]
 requests = [
     {file = "requests-2.22.0-py2.py3-none-any.whl", hash = "sha256:9cf5292fcd0f598c671cfc1e0d7d1a7f13bb8085e9a590f48c010551dc6c4b31"},
