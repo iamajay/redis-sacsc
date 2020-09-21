@@ -6,7 +6,8 @@
 Redis Server-Assisted Client-Side Caching in Python
 
 #### WARNING!
-This feature is still in redis beta release, scheduled to be released in version 6
+1. This feature is still in redis beta release, scheduled to be released in version 6
+2. This library is still a POC, waiiting for rediis to release the feature in stable version so can get better idea about this feature.
 
 
 ## Features
