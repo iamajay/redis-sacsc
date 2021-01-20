@@ -32,7 +32,7 @@ redis = "^3.4.1"
 flake8 = "^3.7.9"
 
 pytest = "^6.0"
-pytest-cov = "^2.7"
+pytest-cov = "^2.11"
 pytest-randomly = "^3.1"
 
 sphinx = "^2.4"
